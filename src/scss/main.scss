@@ -1,0 +1,20 @@
+@use './tw.scss';
+
+html,
+body,
+#app {
+  @apply w-full h-full;
+}
+
+body {
+  @apply bg-red-400 dark:bg-red-950 text-black dark:text-white overflow-hidden;
+  &:before {
+    content: '';
+    @apply block fixed inset-0 bg-center bg-cover bg-black opacity-30 -z-50;
+    background-image: url('../assets/images/bg.jpg');
+  }
+}
+
+.page {
+  @apply w-full h-full;
+}
