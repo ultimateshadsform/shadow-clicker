@@ -4,8 +4,6 @@ import { useGameStore } from '@/stores/game.store';
 import DevMenu from '@/components/DevMenu.vue';
 import Shop from '@/components/Shop.vue';
 
-const isDev = import.meta.env.DEV;
-
 const cookieRef = ref<HTMLElement | null>(null);
 
 const gameStore = useGameStore();
@@ -33,6 +31,21 @@ setInterval(() => {
     );
   }
 }, 1000);
+
+// Create a keyboard event listener that will enable dev mode when shift + alt + e is pressed
+let keys: string[] = [];
+window.addEventListener('keydown', (e) => {
+  keys.push(e.key);
+  if (keys.length > 3) {
+    keys.shift();
+  }
+
+  if (keys.join('') === 'ShiftAltE') {
+    gameStore.$patch((state) => {
+      state.devMode = !state.devMode;
+    });
+  }
+});
 </script>
 
 <template>
@@ -50,7 +63,7 @@ setInterval(() => {
       src="./assets/images/ball.png"
       alt="Shadow Cookie"
     />
-    <DevMenu v-if="isDev" />
+    <DevMenu v-if="gameStore.devMode" />
     <Shop />
   </div>
 </template>

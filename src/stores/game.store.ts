@@ -12,6 +12,8 @@ export const useGameStore = defineStore('game', {
       autoClickers: useStorage('autoClickers', 0),
       autoClickerMultiplier: useStorage('autoClickerMultiplier', 0),
       autoClickerCost: useStorage('autoClickerCost', 15),
+
+      devMode: useStorage('devMode', false),
     };
   },
   actions: {

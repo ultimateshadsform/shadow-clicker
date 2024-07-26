@@ -34,7 +34,7 @@ const autoClickerOwned = computed(() => gameStore.autoClickers);
         <div class="flex flex-col items-center gap-y-1">
           <p>Click multiplier: {{ clickMultiplier }}</p>
           <p>
-            Shadow multiplier: {{ autoClickerMultiplier }} Owned:
+            Shadow multiplier: {{ autoClickerMultiplier.toFixed(1) }} Owned:
             {{ autoClickerOwned }}
           </p>
         </div>
