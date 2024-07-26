@@ -41,7 +41,7 @@ setInterval(() => {
       ref="cookieRef"
       class="font-LilitaOne text-3xl font-semibold text-black custom-shadow"
     >
-      {{ cookieDisplay.toFixed(0) }}
+      {{ Math.floor(cookieDisplay).toLocaleString('en-US') }}
     </h1>
     <img
       @click="addCookie"
