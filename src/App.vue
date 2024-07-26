@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { useGameStore } from '@/stores/game.store';
 import { computed, ref } from 'vue';
-import DevMenu from './components/DevMenu.vue';
+import { useGameStore } from '@/stores/game.store';
+import DevMenu from '@/components/DevMenu.vue';
+import Shop from '@/components/Shop.vue';
 
 const isDev = import.meta.env.DEV;
 
@@ -23,6 +24,15 @@ const addCookie = () => {
     }, 100);
   }
 };
+
+// Create a timer/interval that will add cookies automatically based on the autoClickerMultiplier. (Only if the player has auto clickers)
+setInterval(() => {
+  if (gameStore.autoClickers > 0) {
+    gameStore.addCookies(
+      gameStore.autoClickers * gameStore.autoClickerMultiplier
+    );
+  }
+}, 1000);
 </script>
 
 <template>
@@ -31,7 +41,7 @@ const addCookie = () => {
       ref="cookieRef"
       class="font-LilitaOne text-3xl font-semibold text-black custom-shadow"
     >
-      {{ cookieDisplay }}
+      {{ cookieDisplay.toFixed(0) }}
     </h1>
     <img
       @click="addCookie"
@@ -41,6 +51,7 @@ const addCookie = () => {
       alt="Shadow Cookie"
     />
     <DevMenu v-if="isDev" />
+    <Shop />
   </div>
 </template>
 

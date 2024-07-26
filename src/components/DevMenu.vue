@@ -7,16 +7,8 @@ const gameStore = useGameStore();
 const showDevMenu = ref(false);
 
 const clickMultiplier = computed(() => gameStore.clickMultiplier);
-
-const handleMultiplierChange = (e: Event) => {
-  // Check if is type number and over 0
-  if (e.target instanceof HTMLInputElement) {
-    const value = parseInt(e.target.value);
-    if (value > 0) {
-      gameStore.changeMultiplier(value);
-    }
-  }
-};
+const autoClickerMultiplier = computed(() => gameStore.autoClickerMultiplier);
+const autoClickerOwned = computed(() => gameStore.autoClickers);
 </script>
 
 <template>
@@ -41,15 +33,10 @@ const handleMultiplierChange = (e: Event) => {
         </button>
         <div class="flex flex-col items-center gap-y-1">
           <p>Click multiplier: {{ clickMultiplier }}</p>
-          <div class="flex gap-x-2 w-min">
-            <input
-              @change="handleMultiplierChange"
-              type="number"
-              min="1"
-              value="1"
-              class="h-10 text-center bg-black text-white rounded-lg"
-            />
-          </div>
+          <p>
+            Shadow multiplier: {{ autoClickerMultiplier }} Owned:
+            {{ autoClickerOwned }}
+          </p>
         </div>
       </div>
     </div>

@@ -8,6 +8,10 @@ export const useGameStore = defineStore('game', {
       // all these properties will have their type inferred automatically
       cookies: useStorage('cookies', 0),
       clickMultiplier: useStorage('clickMultiplier', 1),
+
+      autoClickers: useStorage('autoClickers', 0),
+      autoClickerMultiplier: useStorage('autoClickerMultiplier', 0),
+      autoClickerCost: useStorage('autoClickerCost', 15),
     };
   },
   actions: {
@@ -18,12 +22,14 @@ export const useGameStore = defineStore('game', {
     addCookies(amount: number) {
       this.cookies += amount;
     },
+
     changeMultiplier(multiplier: number) {
       this.clickMultiplier = multiplier;
     },
+
     resetGame() {
-      this.cookies = 0;
-      this.clickMultiplier = 1;
+      localStorage.clear();
+      this.$reset();
     },
   },
 });
